@@ -8,6 +8,7 @@ $access_secret = "";
 $associate_tag = "";
 $version = "2011-08-01";
 
+// API リクエスト実行
 function request($url) {
   $ch = curl_init(); 
   curl_setopt ($ch, CURLOPT_URL, $url); 
@@ -24,9 +25,11 @@ function request($url) {
   return $result; 
 }
 
+// サーチインデックス取得
 function get_serach_index($node) {
   global $awsaccess_key, $associate_tag, $version;
 
+  // サーチインデックスリストの定義
   $root[352484011] = 'Apparel';
   $root[2277724051] = 'Appliances';
   $root[2017304051] = 'Automotive';
@@ -58,6 +61,7 @@ function get_serach_index($node) {
   $root[637394] = 'VideoGames';
   $root[324025011] = 'Watches';
 
+  // APIリクエスト用URL取得
   $url = get_xml_url(array(
     "Service" => "AWSECommerceService",
     "AWSAccessKeyId" => $awsaccess_key,
@@ -72,6 +76,7 @@ function get_serach_index($node) {
 
   $index = 'unknown search index';
 
+  // レスポンスのパース
   if ($result != '') {
     $parser = xml_parser_create();
     xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING,0);
@@ -97,6 +102,7 @@ function get_serach_index($node) {
   return $index;
 }
 
+// APIコール用URL生成
 function get_xml_url($params) {
   global $access_secret;  
   $baseurl = 'http://ecs.amazonaws.jp/onca/xml';
