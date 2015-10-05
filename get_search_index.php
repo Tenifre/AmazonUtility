@@ -3,9 +3,9 @@
 $node = $argv[1];
 
 // Amazon Settings
-$awsaccess_key = "AKIAIY7SNH6S2PZBTR5Q";
-$access_secret = "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";
-$associate_tag = "tenifre-22";
+$awsaccess_key = "";
+$access_secret = "";
+$associate_tag = "";
 $version = "2011-08-01";
 
 function request($url) {
